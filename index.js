@@ -12,7 +12,10 @@ var sass = require('metalsmith-sass');
 var inplace = require('metalsmith-in-place');
 var debug = require('metalsmith-debug');
 var postcss = require('metalsmith-with-postcss');
+var pkg = require('./package.json');
 
+var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production');
+console.log((devBuild ? 'Development' : 'Production'), 'build, version', pkg.version);
 
 var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'data'));
 var data = {};
@@ -64,12 +67,12 @@ Metalsmith(__dirname)
     source: './src/assets', // relative to the working directory
     destination: './assets' // relative to the build directory
   }))
-  .use(browserSync({
-    server: './build',
-    files: ['src/**/*.*', 'layouts/*.*', 'partials/**/*.*'],
-    open: false,
-    notify: false
-  }))
+  // .use(browserSync({
+  //   server: './build',
+  //   files: ['src/**/*.*', 'layouts/*.*', 'partials/**/*.*'],
+  //   open: false,
+  //   notify: false
+  // }))
   .use(debug({
     files: false,
     match: "**/*.md"
