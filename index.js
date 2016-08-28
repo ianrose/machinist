@@ -72,7 +72,7 @@ Metalsmith(__dirname)
   //   files: ['src/**/*.*', 'layouts/*.*', 'partials/**/*.*'],
   //   open: false,
   //   notify: false
-  // }))
+  // }))//
   .use(debug({
     files: false,
     match: "**/*.md"
