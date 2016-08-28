@@ -14,6 +14,7 @@ var metadata = require('metalsmith-metadata');
 var sass = require('metalsmith-sass');
 var inplace = require('metalsmith-in-place');
 var debug = require('metalsmith-debug');
+var helpers = require('metalsmith-register-helpers');
 var postcss = require('metalsmith-with-postcss');
 var pkg = require('./package.json');
 
@@ -40,6 +41,9 @@ var ms = Metalsmith(__dirname)
     pattern: ':title'
   }))
   .use(markdown())
+  .use(helpers({
+    directory: 'lib'
+  }))
   .use(inplace({
     engine: 'handlebars',
     pattern: '**/*.html',
@@ -53,15 +57,19 @@ var ms = Metalsmith(__dirname)
     pattern: '**/*.html'
   }))
   .use(sass({
-    outputStyle: 'expanded',
-    outputDir: 'styles'
+    outputStyle: devBuild ? 'expanded' : 'compressed',
+    outputDir: 'styles',
+    sourceMap: devBuild ? true : false,
+    sourceMapContents: devBuild ? true : false
   }))
   .use(postcss({
     pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
+    from: '*.scss',
+    to: '*.css',
+    map: devBuild ? {inline: false} : false,
     plugins: {
       'autoprefixer': {browsers: ['> 0.5%', 'Explorer >= 10']}
-    },
-    map: false
+    }
   }))
   .use(assets({
     source: './src/assets', // relative to the working directory

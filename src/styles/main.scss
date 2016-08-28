@@ -1,17 +1,2 @@
 @import "config";
-
-html {
-  box-sizing: border-box;
-  -ms-text-size-adjust: 100%; /* 2 */
-  -webkit-text-size-adjust: 100%; /* 2 */
-}
-
-*,
-*:before,
-*:after {
-  box-sizing: inherit;
-}
-
-body {
-  font-family: $font-sans;
-}
+@import "base"
