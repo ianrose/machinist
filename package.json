@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "debug": "DEBUG=metalsmith:*, npm start"
+    "debug": "DEBUG=metalsmith:*, npm run dev",
+    "dev": "npm start --development",
+    "build": "npm start --production"
   },
   "repository": {
     "type": "git",
