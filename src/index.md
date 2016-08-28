@@ -1,7 +1,9 @@
-# hello world
+# "hello world"
 
-{{jsonTest examplejson}}
-
-{{examplejson.name}}
+{{capitalize examplejson.name}}
 
 {{exampleyaml.name}}
+
+hello --- world
+
+<p>"test"</p>

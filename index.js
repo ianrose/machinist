@@ -40,7 +40,9 @@ var ms = Metalsmith(__dirname)
   .use(permalinks({
     pattern: ':title'
   }))
-  .use(markdown())
+  .use(markdown({
+    smartypants: true,
+  }))
   .use(helpers({
     directory: 'lib'
   }))
