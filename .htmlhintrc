@@ -1,8 +1,6 @@
 {
   "tagname-lowercase": true,
   "attr-lowercase": ["viewBox"],
-  "attr-value-double-quotes": false,
-  "doctype-first": false,
   "tag-pair": true,
   "id-unique": true,
   "src-not-empty": true,
