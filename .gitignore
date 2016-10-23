@@ -34,7 +34,7 @@ bower_components
 .node_repl_history
 
 # Metalsmith dist
-build
+www
 
 # Hidden OS
 .DS_store
