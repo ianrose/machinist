@@ -20,6 +20,7 @@ var postcss = require('metalsmith-with-postcss');
 var paths = require('metalsmith-paths');
 var drafts = require('metalsmith-drafts');
 var uglify = require('metalsmith-uglify');
+var webpack = require('metalsmith-webpack');
 var pkg = require('./package.json');
 
 var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'data'));
@@ -104,6 +105,15 @@ var ms = Metalsmith(__dirname)
     map: devBuild ? {inline: false} : false,
     plugins: {
       'autoprefixer': {browsers: ['> 0.5%', 'Explorer >= 10']}
+    }
+  }))
+  .use(webpack({
+    context: path.resolve(__dirname, './src/scripts/'),
+    entry: './main.js',
+    devtool: devBuild ? 'source-map' : null,
+    output: {
+      path: path.resolve(__dirname, './www/scripts/'),
+      filename: 'bundle.js'
     }
   }))
   .use(assets({
