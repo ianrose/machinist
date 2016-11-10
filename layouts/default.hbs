@@ -1,0 +1,9 @@
+<!doctype html>
+<html class="no-js">
+  {{> head}}
+  <body class="{{dashcase path}}-page{{#if paths.dir}} {{dirname paths.dir}}-route{{/if}}">
+    {{{typogrFormat contents}}}
+    {{> scripts}}
+    {{#if debugMode}}<pre>{{stringifyFormat this}}</pre>{{/if ~}}
+  </body>
+</html>

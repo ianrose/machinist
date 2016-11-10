@@ -1,5 +1,5 @@
 ---
-title: Two
+title: Title Two
 ---
 
 # Example {{title}}

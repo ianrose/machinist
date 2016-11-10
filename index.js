@@ -1,5 +1,6 @@
 // Set a ture or false for production/development. Use to run certain plugins
 var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production')
+var debugMode = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'debug')
 
 var fs = require('fs')
 var path = require('path')
@@ -34,6 +35,7 @@ var config = {
   name: '',
   version: pkg.version,
   devBuild: devBuild,
+  debugMode: debugMode,
   domain: '',
   url: 'http://www.github.com',
   dest: './www/'
@@ -89,7 +91,7 @@ var ms = Metalsmith(__dirname)
     engine: 'handlebars',
     directory: 'layouts',
     partials: 'partials',
-    default: 'default.html',
+    default: 'default.hbs',
     pattern: '**/*.html'
   }))
   .use(sass({
