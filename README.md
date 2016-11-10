@@ -3,7 +3,7 @@
 An opinionated boilerplate for a [Metalsmith](http://www.metalsmith.io/) static site.
 
 - [Handlebars](http://handlebarsjs.com/)
-- SemistandardJS
+- StandardJS
 - Sass
 - Stylelint Standard
 - Webpack
@@ -43,7 +43,7 @@ Develop with Metalsmith debugging.
 
 ```
 npm run debug
-```
+``` 
 
 ### Build
 
