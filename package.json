@@ -63,6 +63,7 @@
     "htmlhint": "^0.9.13",
     "metalsmith-browser-sync": "^1.1.1",
     "metalsmith-debug": "^1.1.0",
+    "metalsmith-writemetadata": "^0.4.5",
     "standard": "^8.5.0",
     "stylefmt": "^4.3.1",
     "stylelint": "^7.5.0",

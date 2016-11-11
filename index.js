@@ -22,13 +22,15 @@ var paths = require('metalsmith-paths')
 var drafts = require('metalsmith-drafts')
 var uglify = require('metalsmith-uglify')
 var webpack = require('metalsmith-webpack')
+var models = require('./lib/metalsmith-models')
+var writemetadata = require('metalsmith-writemetadata')
 var pkg = require('./package.json')
 
-var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'data'))
+var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'globaldata'))
 var data = {}
 
 dataFiles.forEach(function (filename) {
-  data[filename.split('.')[0]] = 'data/' + filename
+  data[filename.split('.')[0]] = 'globaldata/' + filename
 })
 
 var config = {
@@ -46,14 +48,17 @@ var ms = Metalsmith(__dirname)
   .destination(config.dest)
   .metadata(config)
   .use(globaldata(data))
+  .use(models({
+    directory: './src/models'
+  }))
   .use(collections({
-    work: {
-      pattern: 'work/**/!(index.md)',
+    collection1: {
+      pattern: 'collection1/**/!(index.md)',
       sortBy: 'date',
       reverse: true
     },
-    articles: {
-      pattern: 'articles/**/!(index.md)',
+    collection2: {
+      pattern: 'collection2/**/!(index.md)',
       sortBy: 'date',
       reverse: true
     }
@@ -122,6 +127,13 @@ var ms = Metalsmith(__dirname)
     source: './src/assets', // relative to the working directory
     destination: './assets' // relative to the build directory
   }))
+
+if (debugMode) {
+  ms.use(writemetadata({
+    pattern: ['**/*.md', '**/*.html'],
+    bufferencoding: 'utf8'
+  }))
+}
 
 if (!devBuild) {
   ms.use(uglify({
