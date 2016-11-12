@@ -34,6 +34,7 @@
     ]
   },
   "stylelint": {
+    "ignoreFiles": ["src/styles/vendor/*.scss"],
     "extends": "stylelint-config-standard"
   },
   "dependencies": {
