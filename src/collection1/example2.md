@@ -1,5 +1,5 @@
 ---
-title: Example 2 Title
+title: Example 2 "Title"
 date: 01/02/2016
 ---
 

@@ -3,13 +3,18 @@
 An opinionated boilerplate for a [Metalsmith](http://www.metalsmith.io/) static site.
 
 - [Handlebars](http://handlebarsjs.com/)
-- StandardJS
-- Sass
-- Stylelint Standard
-- Webpack
-- Autoprefixer
-- HTMLHint
-- Editorconfig
+- [StandardJS](https://github.com/feross/standard)
+- [Sass](https://github.com/sass/sass)
+- [Stylelint Standard](https://github.com/stylelint/stylelint-config-standard)
+- [Webpack](https://github.com/christophercliff/metalsmith-webpack)
+- [Autoprefixer](https://github.com/postcss/autoprefixer)
+- [HTMLHint](https://github.com/yaniswang/HTMLHint)
+- [Editorconfig](http://editorconfig.org/)
+
+## Features
+
+- Add structured data globally in JSON or YAML in the `./src/globaldata/`
+- Add structured data to a specific Markdown file by adding in the frontmatter `model: file_name.json`, with `file_name.json` living in `./src/models/`
 
 ## Requirements
 
