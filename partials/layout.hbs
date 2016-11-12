@@ -1,7 +1,7 @@
 <!doctype html>
 <html class="no-js">
   {{> head}}
-  <body class="{{dashcase path}}-page{{#if paths.dir}} {{dirname paths.dir}}-route{{/if}}">
+  <body class="{{#if paths.dir}}{{stem paths.href}}-page{{else}}{{paths.name}}-page{{/if}}{{#if paths.dir}} {{segments paths.dir '0' '1'}}-route{{/if}}">
     <a href="/">Home</a>
     {{> @partial-block }}
     {{> scripts}}
