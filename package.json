@@ -10,7 +10,7 @@
     "dev": "npm start --development",
     "build": "npm start --production",
     "format": "standard --fix && stylefmt -R src/styles/",
-    "lint": "standard --verbose && htmlhint --ignore **/www/** && stylelint '**/*.scss'"
+    "lint": "standard --verbose && stylelint '**/*.scss' && htmlhint **/*.{hbs,html} --config .htmlhintrc --ignore **/www/**"
   },
   "repository": {
     "type": "git",
