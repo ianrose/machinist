@@ -1,9 +1,12 @@
 ---
 title: Home
 model: data_file
+source: assets/graphics/example.html
 ---
 
 # {{title}}
+
+{{{raw source}}}
 
 {{model.key1}}
 

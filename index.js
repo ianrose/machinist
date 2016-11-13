@@ -24,6 +24,7 @@ var uglify = require('metalsmith-uglify')
 var webpack = require('metalsmith-webpack')
 var models = require('./lib/metalsmith-models')
 var writemetadata = require('metalsmith-writemetadata')
+var raw = require('metalsmith-raw')
 var pkg = require('./package.json')
 
 var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'globaldata'))
@@ -84,6 +85,7 @@ var ms = Metalsmith(__dirname)
     property: 'paths',
     directoryIndex: 'index.html'
   }))
+  .use(raw())
   .use(helpers({
     directory: 'lib'
   }))
