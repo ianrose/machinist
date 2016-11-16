@@ -53,8 +53,8 @@ var ms = Metalsmith(__dirname)
     directory: './src/models'
   }))
   .use(collections({
-    collection1: {
-      pattern: 'collection1/**/!(index.md)',
+    posts: {
+      pattern: 'posts/**/!(index.md)',
       sortBy: 'date',
       reverse: true
     },

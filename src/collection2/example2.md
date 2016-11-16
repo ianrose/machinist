@@ -1,6 +1,6 @@
 ---
 title: Example 2 Title
-date: 01/02/2016
+date: 2016-01-02
 ---
 
 {{title}}

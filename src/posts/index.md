@@ -1,5 +1,5 @@
 ---
-title: Collection 1
+title: Posts
 layout: collection.hbs
 ---
 

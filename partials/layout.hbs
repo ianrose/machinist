@@ -3,7 +3,7 @@
   {{> head}}
   <body class="{{#if paths.dir}}{{stem paths.href}}-page{{else}}{{paths.name}}-page{{/if}}{{#if paths.dir}} {{segments paths.dir '0' '1'}}-route{{/if}}">
     <a href="/">Home</a>
-    {{> @partial-block }}
+{{> @partial-block }}
     {{> scripts}}
   </body>
 </html>
