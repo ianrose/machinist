@@ -22,7 +22,12 @@
   {{#if service.socialimage}}<meta name="twitter:image:src" content="{{service.socialimage}}" />{{/if}}
   <title>{{#if title}}{{capitalize title}}{{else}}{{capitalize paths.dir}}{{/if}} | {{name}}</title>
   <link rel="author" href="humans.txt" />
+  {{#unless noMainStyles}}
   <link rel="stylesheet" href="/styles/main.css">
+  {{/unless}}
+  {{#each styles}}
+    <link rel="stylesheet" href="{{this}}">
+  {{/each}}
   <title>Page Title</title>
 <!-- {{#if devBuild}}dev{{else}}production{{/if}} v{{version}} -->
 </head>
