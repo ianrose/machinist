@@ -33,7 +33,7 @@
   },
   "homepage": "https://github.com/ianrose/machinist#readme",
   "lint-staged": {
-    "**/*.scss": "style-lint",
+    "*.scss": "style-lint",
     "*.js": "script-lint"
   },
   "standard": {
