@@ -21,7 +21,7 @@ var postcss = require('metalsmith-with-postcss')
 var paths = require('metalsmith-paths')
 var drafts = require('metalsmith-drafts')
 var uglify = require('metalsmith-uglify')
-var webpack = require('metalsmith-webpack')
+var webpack = require('ms-webpack')
 var models = require('./lib/metalsmith-models')
 var writemetadata = require('metalsmith-writemetadata')
 var raw = require('metalsmith-raw')
@@ -103,13 +103,15 @@ var ms = Metalsmith(__dirname)
     }
   }))
   .use(webpack({
-    context: path.resolve(__dirname, './src/scripts/'),
+    context: './src/scripts/',
     entry: './main.js',
     devtool: devBuild ? 'source-map' : null,
     output: {
-      path: path.resolve(__dirname, './www/scripts/'),
-      filename: 'bundle.js'
-    }
+      path: './www/scripts/',
+      filename: devBuild ? '[name].js' : '[name].[chunkhash].js'
+    },
+    watch: false,
+    watchMode: false
   }))
   .use(fingerprint({
     pattern: 'styles/main.css',
