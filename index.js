@@ -21,7 +21,7 @@ var postcss = require('metalsmith-with-postcss')
 var paths = require('metalsmith-paths')
 var drafts = require('metalsmith-drafts')
 var uglify = require('metalsmith-uglify')
-var webpack = require('ms-webpack')
+var webpack = require('metalsmith-webpack')
 var models = require('./lib/metalsmith-models')
 var writemetadata = require('metalsmith-writemetadata')
 var raw = require('metalsmith-raw')
@@ -107,7 +107,7 @@ var ms = Metalsmith(__dirname)
     entry: './main.js',
     devtool: devBuild ? 'source-map' : null,
     output: {
-      path: './www/scripts/',
+      path: path.resolve(__dirname, './www/scripts/'),
       filename: devBuild ? '[name].js' : '[name].[chunkhash].js'
     },
     watch: false,
