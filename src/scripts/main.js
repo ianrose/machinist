@@ -1,5 +1,5 @@
-var multiplyBy2 = require('./a')
-var multiplyBy3 = require('./b')
+var multiplyBy2 = require('./modules/a')
+var multiplyBy3 = require('./modules/b')
 var resultA = multiplyBy2(4)
 var resultB = multiplyBy3(5)
-console.log(resultA + ' ' + resultB)
+console.log(resultA + ' ' + resultB + 'hello world')

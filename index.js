@@ -103,12 +103,12 @@ var ms = Metalsmith(__dirname)
     }
   }))
   .use(webpack({
-    context: path.resolve(__dirname, './src/scripts/'),
+    context: './src/scripts/',
     entry: './main.js',
     devtool: devBuild ? 'source-map' : null,
     output: {
       path: path.resolve(__dirname, './www/scripts/'),
-      filename: 'bundle.js'
+      filename: devBuild ? '[name].js' : '[name].[hash].js'
     }
   }))
   .use(fingerprint({
