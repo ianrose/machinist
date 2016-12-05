@@ -25,6 +25,7 @@ var webpack = require('metalsmith-webpack')
 var models = require('./lib/metalsmith-models')
 var writemetadata = require('metalsmith-writemetadata')
 var raw = require('metalsmith-raw')
+var fingerprint = require('metalsmith-fingerprint-ignore')
 var pkg = require('./package.json')
 
 var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'globaldata'))
@@ -86,21 +87,6 @@ var ms = Metalsmith(__dirname)
     directoryIndex: 'index.html'
   }))
   .use(raw())
-  .use(helpers({
-    directory: 'lib'
-  }))
-  .use(inplace({
-    engine: 'handlebars',
-    pattern: '**/*.{html,xml}',
-    directory: 'src/'
-  }))
-  .use(layouts({
-    engine: 'handlebars',
-    directory: 'layouts',
-    partials: 'partials',
-    default: 'default.hbs',
-    pattern: '**/*.html'
-  }))
   .use(sass({
     outputStyle: devBuild ? 'expanded' : 'compressed',
     outputDir: 'styles',
@@ -124,6 +110,25 @@ var ms = Metalsmith(__dirname)
       path: path.resolve(__dirname, './www/scripts/'),
       filename: 'bundle.js'
     }
+  }))
+  .use(fingerprint({
+    pattern: 'styles/main.css',
+    keep: true
+  }))
+  .use(helpers({
+    directory: 'lib'
+  }))
+  .use(inplace({
+    engine: 'handlebars',
+    pattern: '**/*.{html,xml}',
+    directory: 'src/'
+  }))
+  .use(layouts({
+    engine: 'handlebars',
+    directory: 'layouts',
+    partials: 'partials',
+    default: 'default.hbs',
+    pattern: '**/*.html'
   }))
   .use(assets({
     source: './src/assets', // relative to the working directory
