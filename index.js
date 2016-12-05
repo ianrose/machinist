@@ -28,11 +28,11 @@ var raw = require('metalsmith-raw')
 var fingerprint = require('metalsmith-fingerprint-ignore')
 var pkg = require('./package.json')
 
-var dataFiles = fs.readdirSync(path.join(__dirname, 'src', 'globaldata'))
+var dataFiles = fs.readdirSync(path.join(__dirname, 'src/data', 'globals'))
 var data = {}
 
 dataFiles.forEach(function (filename) {
-  data[filename.split('.')[0]] = 'globaldata/' + filename
+  data[filename.split('.')[0]] = 'data/globals/' + filename
 })
 
 var config = {
@@ -51,7 +51,7 @@ var ms = Metalsmith(__dirname)
   .metadata(config)
   .use(globaldata(data))
   .use(models({
-    directory: './src/models'
+    directory: './src/data/models'
   }))
   .use(collections({
     posts: {
@@ -131,7 +131,7 @@ var ms = Metalsmith(__dirname)
     pattern: '**/*.html'
   }))
   .use(assets({
-    source: './src/assets', // relative to the working directory
+    source: './assets', // relative to the working directory
     destination: './assets' // relative to the build directory
   }))
 

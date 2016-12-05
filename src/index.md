@@ -1,7 +1,7 @@
 ---
 title: Home
 model: data_file
-source: assets/graphics/example.html
+source: ../graphics/example.html
 ---
 
 # {{title}}
@@ -10,9 +10,9 @@ source: assets/graphics/example.html
 
 {{model.key1}}
 
-{{capitalize examplejson.name}}
+{{capitalize globaljson.name}}
 
-{{exampleyaml.name}}
+{{globalyaml.name}}
 
 hello --- world
 
