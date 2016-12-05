@@ -18,6 +18,8 @@ hello --- world
 
 <p>"test"</p>
 
+![alt text](/assets/images/placeholder.png "Title Text")
+
 {{#each collections}}
     <h2><a href="/{{@key}}">{{@key}}</a></h2>
 {{/each}}
