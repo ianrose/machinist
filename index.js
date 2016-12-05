@@ -108,10 +108,8 @@ var ms = Metalsmith(__dirname)
     devtool: devBuild ? 'source-map' : null,
     output: {
       path: path.resolve(__dirname, './www/scripts/'),
-      filename: devBuild ? '[name].js' : '[name].[chunkhash].js'
-    },
-    watch: false,
-    watchMode: false
+      filename: devBuild ? '[name].js' : '[name].[hash].js'
+    }
   }))
   .use(fingerprint({
     pattern: 'styles/main.css',
