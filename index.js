@@ -2,6 +2,7 @@
 var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production')
 var debugMode = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'debug')
 
+// Dependencies
 var fs = require('fs')
 var path = require('path')
 var Metalsmith = require('metalsmith')
@@ -28,13 +29,7 @@ var raw = require('metalsmith-raw')
 var fingerprint = require('metalsmith-fingerprint-ignore')
 var pkg = require('./package.json')
 
-var dataFiles = fs.readdirSync(path.join(__dirname, 'src/data', 'globals'))
-var data = {}
-
-dataFiles.forEach(function (filename) {
-  data[filename.split('.')[0]] = 'data/globals/' + filename
-})
-
+// Configuration
 var config = {
   name: '',
   version: pkg.version,
@@ -45,6 +40,15 @@ var config = {
   dest: './www/'
 }
 
+// Adds metadata from files
+var dataFiles = fs.readdirSync(path.join(__dirname, 'src/data', 'globals'))
+var data = {}
+
+dataFiles.forEach(function (filename) {
+  data[filename.split('.')[0]] = 'data/globals/' + filename
+})
+
+// Metalsmith Build
 var ms = Metalsmith(__dirname)
   .source('src/')
   .destination(config.dest)
@@ -107,7 +111,7 @@ var ms = Metalsmith(__dirname)
     entry: './main.js',
     devtool: devBuild ? 'source-map' : null,
     output: {
-      path: path.resolve(__dirname, './www/scripts/'),
+      path: path.resolve(__dirname, config.dest + 'scripts/'),
       filename: devBuild ? '[name].js' : '[name].[hash].js'
     }
   }))
