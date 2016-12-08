@@ -1,4 +1,4 @@
-// Set a ture or false for production/development. Use to run certain plugins
+// Set a true or false for production/development. Use to run certain plugins
 var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production')
 var debugMode = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'debug')
 
@@ -37,11 +37,12 @@ var config = {
   debugMode: debugMode,
   domain: '',
   url: 'http://www.github.com',
-  dest: './www/'
+  dest: './www/',
+  src: './src/'
 }
 
 // Adds metadata from files
-var dataFiles = fs.readdirSync(path.join(__dirname, 'src/data', 'globals'))
+var dataFiles = fs.readdirSync(path.join(__dirname, config.src + 'data', 'globals'))
 var data = {}
 
 dataFiles.forEach(function (filename) {
@@ -50,7 +51,7 @@ dataFiles.forEach(function (filename) {
 
 // Metalsmith Build
 var ms = Metalsmith(__dirname)
-  .source('src/')
+  .source(config.src)
   .destination(config.dest)
   .metadata(config)
   .use(globaldata(data))
@@ -125,7 +126,7 @@ var ms = Metalsmith(__dirname)
   .use(inplace({
     engine: 'handlebars',
     pattern: '**/*.{html,xml}',
-    directory: 'src/'
+    directory: config.src
   }))
   .use(layouts({
     engine: 'handlebars',
