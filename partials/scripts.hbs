@@ -1,4 +1,4 @@
-<script src="/scripts/{{#if devBuild}}main.js{{else}}main.{{webpackStats.hash}}.js{{/if}}"></script>
+<script src="{{assethPath}}scripts/{{#if devBuild}}main.js{{else}}main.{{webpackStats.hash}}.js{{/if}}"></script>
 {{#each scripts}}
 <script src="{{this}}" charset="utf-8"></script>
 {{/each}}

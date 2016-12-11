@@ -1,5 +1,7 @@
 // Set a true or false for production/development. Use to run certain plugins
-var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() !== 'production')
+var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'development')
+var stageBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'staging')
+var productionBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production')
 var debugMode = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'debug')
 
 // Dependencies
@@ -30,15 +32,33 @@ var fingerprint = require('metalsmith-fingerprint-ignore')
 var pkg = require('./package.json')
 
 // Configuration
+var assetPath
+
+if (devBuild) {
+  assetPath = '/'
+}
+
+if (stageBuild) {
+  assetPath = '/'
+}
+
+if (productionBuild) {
+  assetPath = '/'
+}
+
 var config = {
   name: '',
+  title: '',
+  domain: '',
+  url: 'http://blank.org',
   version: pkg.version,
+  description: pkg.description,
+  keywords: '',
   devBuild: devBuild,
   debugMode: debugMode,
-  domain: '',
-  url: 'http://www.github.com',
   dest: './www/',
-  src: './src/'
+  src: './src/',
+  assetPath: assetPath
 }
 
 // Adds metadata from files
@@ -56,7 +76,7 @@ var ms = Metalsmith(__dirname)
   .metadata(config)
   .use(globaldata(data))
   .use(models({
-    directory: './src/data/models'
+    directory: config.src + 'data/models'
   }))
   .use(collections({
     posts: {
@@ -73,7 +93,8 @@ var ms = Metalsmith(__dirname)
   .use(markdown({
     smartypants: true,
     gfm: true,
-    tables: true
+    tables: true,
+    langPrefix: 'language-'
   }))
   .use(drafts())
   .use(permalinks({
@@ -108,7 +129,7 @@ var ms = Metalsmith(__dirname)
     }
   }))
   .use(webpack({
-    context: './src/scripts/',
+    context: config.src + 'scripts/',
     entry: './main.js',
     devtool: devBuild ? 'source-map' : null,
     output: {
@@ -157,7 +178,7 @@ if (!devBuild) {
 if (devBuild) {
   ms.use(browserSync({
     server: config.dest,
-    files: ['src/**/*.*', 'layouts/*.*', 'partials/**/*.*'],
+    files: [config.src + '**/*.*', 'layouts/*.*', 'partials/**/*.*'],
     open: false,
     notify: false
   }))

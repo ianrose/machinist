@@ -23,7 +23,7 @@
   <title>{{#if title}}{{capitalize title}}{{else}}{{capitalize paths.dir}}{{/if}} | {{name}}</title>
   <link rel="author" href="humans.txt" />
   {{#unless noMainStyles}}
-  <link rel="stylesheet" href="/{{#if devBuild}}styles/main.css{{else}}{{fingerprint.[styles/main.css]}}{{/if}}">
+  <link rel="stylesheet" href="{{assetPath}}{{#if devBuild}}styles/main.css{{else}}{{fingerprint.[styles/main.css]}}{{/if}}">
   {{/unless}}
   {{#each styles}}
     <link rel="stylesheet" href="{{this}}">
