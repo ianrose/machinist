@@ -2,6 +2,11 @@
 title: Home
 model: data_file
 source: ../graphics/example.html
+socialImage: /assets/images/placeholder.png
+styles:
+  - //vjs.zencdn.net/5.9.2/video-js.min.css
+scripts:
+  - //ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js
 ---
 
 # {{title}}

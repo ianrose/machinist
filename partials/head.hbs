@@ -12,22 +12,22 @@
   <meta property="og:title" content="{{capitalize title}} - {{name}}" />
   <meta property="og:url" content="{{url}}{{paths.href}}" />
   <meta property="og:type" content="article" />
-  {{#if service.socialimage}}<meta property="og:image" content="{{service.socialimage}}" />{{/if}}
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="{{name}}" />
+  {{#if socialImage}}<meta property="og:image" content="{{socialImage}}" />{{/if}}
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="{{twitterHandle}}" />
   <meta name="twitter:title" content="{{title}} - {{name}}" />
   <meta name="twitter:description" content="{{description}}" />
   <meta name="twitter:creator" content="{{name}}" />
   <meta name="twitter:domain" content="{{url}}>" />
-  {{#if service.socialimage}}<meta name="twitter:image:src" content="{{service.socialimage}}" />{{/if}}
-  <title>{{#if title}}{{capitalize title}}{{else}}{{capitalize paths.dir}}{{/if}} | {{name}}</title>
+  {{#if socialImage}}<meta name="twitter:image" content="{{socialImage}}" />{{/if}}
+  {{#if googleVerification}}<meta name="google-site-verification" content="{{googleVerification}}" />{{/if}}
   <link rel="author" href="humans.txt" />
-  {{#unless noMainStyles}}
-  <link rel="stylesheet" href="{{assetPath}}{{#if devBuild}}styles/main.css{{else}}{{fingerprint.[styles/main.css]}}{{/if}}">
-  {{/unless}}
   {{#each styles}}
     <link rel="stylesheet" href="{{this}}">
   {{/each}}
-  <title>Page Title</title>
+  {{#unless noMainStyles}}
+  <link rel="stylesheet" href="{{assetPath}}{{#if devBuild}}styles/main.css{{else}}{{fingerprint.[styles/main.css]}}{{/if}}">
+  {{/unless}}
+  <title>{{#if title}}{{capitalize title}}{{else}}{{capitalize paths.dir}}{{/if}} | {{name}}</title>
 <!-- {{#if devBuild}}dev{{else}}production{{/if}} v{{version}} -->
 </head>

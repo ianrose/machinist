@@ -58,7 +58,8 @@ var config = {
   debugMode: debugMode,
   dest: './www/',
   src: './src/',
-  assetPath: assetPath
+  assetPath: assetPath,
+  googleVerification: null
 }
 
 // Adds metadata from files
