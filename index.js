@@ -31,7 +31,7 @@ var raw = require('metalsmith-raw')
 var fingerprint = require('metalsmith-fingerprint-ignore')
 var pkg = require('./package.json')
 
-// Configuration
+// Global Configuration
 var assetPath
 
 if (devBuild) {
@@ -47,19 +47,22 @@ if (productionBuild) {
 }
 
 var config = {
-  name: '',
-  title: '',
-  domain: '',
+  name: 'Person or Org',
+  title: 'Global Title',
+  domain: 'blank.org',
   url: 'http://blank.org',
   version: pkg.version,
-  description: pkg.description,
-  keywords: '',
+  description: 'Global Description',
+  keywords: null,
   devBuild: devBuild,
   debugMode: debugMode,
   dest: './www/',
   src: './src/',
   assetPath: assetPath,
-  googleVerification: null
+  googleVerification: null,
+  analyticsId: 'GA-######',
+  twitterHandle: null,
+  dependencies: pkg.dependencies
 }
 
 // Adds metadata from files
@@ -147,7 +150,7 @@ var ms = Metalsmith(__dirname)
   }))
   .use(inplace({
     engine: 'handlebars',
-    pattern: '**/*.{html,xml}',
+    pattern: '**/*.{html,xml,txt}',
     directory: config.src
   }))
   .use(layouts({

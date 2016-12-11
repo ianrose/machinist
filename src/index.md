@@ -1,5 +1,6 @@
 ---
 title: Home
+description: Home Description
 model: data_file
 source: ../graphics/example.html
 socialImage: /assets/images/placeholder.png
