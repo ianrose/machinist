@@ -71,6 +71,7 @@
     "metalsmith-uglify": "^1.5.1",
     "metalsmith-webpack": "git+https://github.com/okonet/metalsmith-webpack.git",
     "metalsmith-with-postcss": "^1.0.0",
+    "minimatch": "^3.0.3",
     "typogr": "^0.6.6"
   },
   "devDependencies": {

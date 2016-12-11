@@ -26,6 +26,7 @@ var drafts = require('metalsmith-drafts')
 var uglify = require('metalsmith-uglify')
 var webpack = require('metalsmith-webpack')
 var models = require('./lib/metalsmith-models')
+var filedata = require('./lib/metalsmith-filedata')
 var writemetadata = require('metalsmith-writemetadata')
 var raw = require('metalsmith-raw')
 var fingerprint = require('metalsmith-fingerprint-ignore')
@@ -94,6 +95,38 @@ var ms = Metalsmith(__dirname)
       reverse: true
     }
   }))
+  .use(sass({
+    outputStyle: devBuild ? 'expanded' : 'compressed',
+    outputDir: 'styles',
+    sourceMap: devBuild || false,
+    sourceMapContents: devBuild || false
+  }))
+  .use(postcss({
+    pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
+    from: '*.scss',
+    to: '*.css',
+    map: devBuild ? {inline: false} : false,
+    plugins: {
+      'autoprefixer': {browsers: ['> 0.5%', 'Explorer >= 10']}
+    }
+  }))
+  .use(filedata({
+    pattern: 'main.css',
+    key: 'cssData'
+  }))
+  .use(webpack({
+    context: config.src + 'scripts/',
+    entry: './main.js',
+    devtool: devBuild ? 'source-map' : null,
+    output: {
+      path: path.resolve(__dirname, config.dest + 'scripts/'),
+      filename: devBuild ? '[name].js' : '[name].[hash].js'
+    }
+  }))
+  .use(fingerprint({
+    pattern: 'styles/main.css',
+    keep: true
+  }))
   .use(markdown({
     smartypants: true,
     gfm: true,
@@ -117,34 +150,6 @@ var ms = Metalsmith(__dirname)
     directoryIndex: 'index.html'
   }))
   .use(raw())
-  .use(sass({
-    outputStyle: devBuild ? 'expanded' : 'compressed',
-    outputDir: 'styles',
-    sourceMap: devBuild || false,
-    sourceMapContents: devBuild || false
-  }))
-  .use(postcss({
-    pattern: ['**/*.css', '!**/_*/*', '!**/_*'],
-    from: '*.scss',
-    to: '*.css',
-    map: devBuild ? {inline: false} : false,
-    plugins: {
-      'autoprefixer': {browsers: ['> 0.5%', 'Explorer >= 10']}
-    }
-  }))
-  .use(webpack({
-    context: config.src + 'scripts/',
-    entry: './main.js',
-    devtool: devBuild ? 'source-map' : null,
-    output: {
-      path: path.resolve(__dirname, config.dest + 'scripts/'),
-      filename: devBuild ? '[name].js' : '[name].[hash].js'
-    }
-  }))
-  .use(fingerprint({
-    pattern: 'styles/main.css',
-    keep: true
-  }))
   .use(helpers({
     directory: 'lib'
   }))
