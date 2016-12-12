@@ -31,40 +31,29 @@ var writemetadata = require('metalsmith-writemetadata')
 var raw = require('metalsmith-raw')
 var fingerprint = require('metalsmith-fingerprint-ignore')
 var pkg = require('./package.json')
+var config = require('./config.json')
 
 // Global Configuration
 var assetPath
 
 if (devBuild) {
-  assetPath = '/'
+  assetPath = config.assetPath.development
 }
 
 if (stageBuild) {
-  assetPath = '/'
+  assetPath = config.assetPath.stage
 }
 
 if (productionBuild) {
-  assetPath = '/'
+  assetPath = config.assetPath.production
 }
 
-var config = {
-  name: 'Person or Org',
-  title: 'Global Title',
-  domain: 'blank.org',
-  url: 'http://blank.org',
-  version: pkg.version,
-  description: 'Global Description',
-  keywords: null,
-  devBuild: devBuild,
-  debugMode: debugMode,
-  dest: './www/',
-  src: './src/',
-  assetPath: assetPath,
-  googleVerification: null,
-  analyticsId: 'GA-######',
-  twitterHandle: null,
-  dependencies: pkg.dependencies
-}
+config.assetPath = assetPath
+config.version = pkg.version
+config.dependencies = pkg.dependencies
+config.repository = pkg.repository.url
+config.devBuild = devBuild
+config.debugMode = debugMode
 
 // Adds metadata from files
 var dataFiles = fs.readdirSync(path.join(__dirname, config.src + 'data', 'globals'))

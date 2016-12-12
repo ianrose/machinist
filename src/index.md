@@ -3,7 +3,8 @@ title: Home
 description: Home Description
 model: data_file
 source: ../graphics/example.html
-socialImage: /assets/images/placeholder.png
+openGraph: 
+  image: /assets/images/placeholder.png
 styles:
   - //vjs.zencdn.net/5.9.2/video-js.min.css
 scripts:

@@ -1,0 +1,34 @@
+{
+  "name": "Person or Org",
+  "title": "Global Title",
+  "titleSeperator": "|",
+  "domain": "blank.org",
+  "url": "http://blank.org",
+  "description": "Global Description",
+  "keywords": null,
+  "dest": "./www/",
+  "src": "./src/",
+  "assetPath": {
+    "development": "/",
+    "stage": "/",
+    "production": "/"
+  },
+  "googleVerification": null,
+  "analytics": {
+    "provider": false,
+    "google": {
+      "trackingId": "GA-######"
+    }
+  },
+  "twitter": {
+    "username": "@username"
+  },
+  "facebook": {
+    "username": null,
+    "appId": null,
+    "publisher": null
+  },
+  "openGraph": {
+    "image": null
+  }
+}
