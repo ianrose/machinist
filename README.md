@@ -33,6 +33,46 @@ git clone https://github.com/ianrose/machinist.git
 ```
 $ npm install
 ```
+### 3. Configure Project
+
+Edit the `./config.json` as you see fit.
+
+```json
+{
+  "name": "Person or Org",
+  "title": "Global Title",
+  "titleSeperator": "|",
+  "domain": "blank.org",
+  "url": "http://blank.org",
+  "description": "Global Description",
+  "keywords": null,
+  "dest": "./www/",
+  "src": "./src/",
+  "assetPath": {
+    "development": "/",
+    "stage": "/",
+    "production": "/"
+  },
+  "googleVerification": null,
+  "analytics": {
+    "provider": false,
+    "google": {
+      "trackingId": "GA-######"
+    }
+  },
+  "twitter": {
+    "username": "@username"
+  },
+  "facebook": {
+    "username": null,
+    "appId": null,
+    "publisher": null
+  },
+  "openGraph": {
+    "image": null
+  }
+}
+```
 
 ## How to use
 
