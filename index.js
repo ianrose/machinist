@@ -56,13 +56,14 @@ config.devBuild = devBuild
 config.debugMode = debugMode
 
 // Adds metadata from files
-var dataFiles = fs.readdirSync(path.join(__dirname, config.src + 'data', 'globals'))
 var data = {}
+if (fs.existsSync(config.src + 'data/globals/')) {
+  var dataFiles = fs.readdirSync(path.join(__dirname, config.src + 'data', 'globals'))
 
-dataFiles.forEach(function (filename) {
-  data[filename.split('.')[0]] = 'data/globals/' + filename
-})
-
+  dataFiles.forEach(function (filename) {
+    data[filename.split('.')[0]] = 'data/globals/' + filename
+  })
+}
 // Metalsmith Build
 var ms = Metalsmith(__dirname)
   .source(config.src)
