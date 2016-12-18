@@ -16,6 +16,12 @@ scripts:
 
 {{{raw source}}}
 
+<br>
+<pre>
+{{{cssData.[styles/main.css]}}}
+</pre>
+<br>
+
 {{model.key1}}
 
 {{capitalize globaljson.name}}

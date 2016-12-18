@@ -26,7 +26,7 @@ var drafts = require('metalsmith-drafts')
 var uglify = require('metalsmith-uglify')
 var webpack = require('metalsmith-webpack')
 var models = require('./lib/metalsmith-models')
-var filedata = require('./lib/metalsmith-filedata')
+var filedata = require('metalsmith-filedata')
 var writemetadata = require('metalsmith-writemetadata')
 var raw = require('metalsmith-raw')
 var fingerprint = require('metalsmith-fingerprint-ignore')
@@ -64,6 +64,7 @@ if (fs.existsSync(config.src + 'data/globals/')) {
     data[filename.split('.')[0]] = 'data/globals/' + filename
   })
 }
+
 // Metalsmith Build
 var ms = Metalsmith(__dirname)
   .source(config.src)
@@ -101,7 +102,7 @@ var ms = Metalsmith(__dirname)
     }
   }))
   .use(filedata({
-    pattern: 'main.css',
+    pattern: ['styles/*.css'],
     key: 'cssData'
   }))
   .use(webpack({
