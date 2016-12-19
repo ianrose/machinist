@@ -70,6 +70,10 @@ Edit the `./config.json` as you see fit.
   },
   "openGraph": {
     "image": null
+  },
+  "googleDocJson": {
+    "fileId": null,
+    "output": "./src/data/models/archieExample.json"
   }
 }
 ```
