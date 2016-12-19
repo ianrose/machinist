@@ -7,6 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
+    "doc-ingest": "node ./lib/googledocjson.js",
     "debug": "DEBUG=metalsmith:*, NODE_ENV=debug npm run dev",
     "dev": "NODE_ENV=development npm start",
     "build": "NODE_ENV=production npm start",
@@ -82,7 +83,7 @@
     "metalsmith-debug": "^1.1.0",
     "metalsmith-writemetadata": "^0.4.5",
     "pre-commit": "^1.1.3",
-    "standard": "^8.5.0",
+    "standard": "^8.6.0",
     "stylefmt": "^4.3.1",
     "stylelint": "^7.5.0",
     "stylelint-config-standard": "^14.0.0"

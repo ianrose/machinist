@@ -38,3 +38,6 @@ www
 
 # Hidden OS
 .DS_store
+
+# Configurations
+/configs/

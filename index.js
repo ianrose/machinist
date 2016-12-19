@@ -142,7 +142,7 @@ var ms = Metalsmith(__dirname)
   }))
   .use(raw())
   .use(helpers({
-    directory: 'lib'
+    directory: 'lib/helpers'
   }))
   .use(inplace({
     engine: 'handlebars',
