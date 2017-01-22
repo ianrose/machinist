@@ -8,6 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "doc-ingest": "node ./lib/googledocjson.js",
+    "sheet-ingest": "node ./lib/googlesheetjson.js",
     "debug": "DEBUG=metalsmith:*, NODE_ENV=debug npm run dev",
     "dev": "NODE_ENV=development npm start",
     "build": "NODE_ENV=production npm start",
@@ -51,6 +52,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.4.0",
+    "googlesheets-reader": "0.0.1",
     "handlebars": "^4.0.5",
     "handlebars-helpers": "^0.7.5",
     "metalsmith": "^2.2.0",
@@ -64,6 +66,7 @@
     "metalsmith-mapsite": "^1.0.4",
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-metadata": "0.0.4",
+    "metalsmith-models": "git+https://github.com/ianrose/metalsmith-models.git#handles-no-models",
     "metalsmith-paths": "^3.0.1",
     "metalsmith-permalinks": "^0.5.0",
     "metalsmith-postcss": "^4.0.0",
@@ -73,7 +76,6 @@
     "metalsmith-uglify": "^1.5.1",
     "metalsmith-webpack": "git+https://github.com/okonet/metalsmith-webpack.git",
     "metalsmith-with-postcss": "^1.0.0",
-    "metalsmith-models": "git+https://github.com/ianrose/metalsmith-models.git#handles-no-models",
     "typogr": "^0.6.6"
   },
   "devDependencies": {

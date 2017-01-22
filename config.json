@@ -34,5 +34,10 @@
   "googleDocJson": {
     "fileId": null,
     "output": "./src/data/models/archieExample.json"
+  },
+  "googleSheetJson": {
+    "key": null,
+    "output": "./src/data/models/sheetExample.json",
+    "worksheet": 0
   }
 }
