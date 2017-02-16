@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.4.0",
+    "googledoc-to-json": "^0.3.0",
     "handlebars": "^4.0.5",
     "handlebars-helpers": "^0.7.5",
     "metalsmith": "^2.2.0",
