@@ -118,11 +118,27 @@ var ms = Metalsmith(__dirname)
     pattern: 'styles/main.css',
     keep: true
   }))
+  .use(raw())
+  .use(helpers({
+    directory: 'lib/helpers'
+  }))
+  .use(inplace({
+    engine: 'handlebars',
+    pattern: '**/*.{html,xml,txt,md}',
+    directory: config.src
+  }))
   .use(markdown({
     smartypants: true,
     gfm: true,
     tables: true,
     langPrefix: 'language-'
+  }))
+  .use(layouts({
+    engine: 'handlebars',
+    directory: 'layouts',
+    partials: 'partials',
+    default: 'default.hbs',
+    pattern: '**/*.html'
   }))
   .use(drafts())
   .use(permalinks({
@@ -139,22 +155,6 @@ var ms = Metalsmith(__dirname)
   .use(paths({
     property: 'paths',
     directoryIndex: 'index.html'
-  }))
-  .use(raw())
-  .use(helpers({
-    directory: 'lib/helpers'
-  }))
-  .use(inplace({
-    engine: 'handlebars',
-    pattern: '**/*.{html,xml,txt}',
-    directory: config.src
-  }))
-  .use(layouts({
-    engine: 'handlebars',
-    directory: 'layouts',
-    partials: 'partials',
-    default: 'default.hbs',
-    pattern: '**/*.html'
   }))
   .use(assets({
     source: './assets', // relative to the working directory
