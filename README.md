@@ -1,3 +1,5 @@
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/ianrose/machinist/master/LICENSE)
+
 # Machinist
 
 An opinionated boilerplate for a [Metalsmith](http://www.metalsmith.io/) static site.
