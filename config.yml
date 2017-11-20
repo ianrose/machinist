@@ -1,0 +1,29 @@
+name: Person or Org
+title: Global Title
+titleSeperator: "|"
+domain: blank.org
+url: http://blank.org
+description: Global Description
+keywords:
+dest: "./www/"
+src: "./src/"
+assetPath:
+  development: "/"
+  stage: "/"
+  production: "/"
+googleVerification:
+analytics:
+  provider: false
+  google:
+    trackingId: GA-######
+twitter:
+  username: "@username"
+facebook:
+  username:
+  appId:
+  publisher:
+openGraph:
+  image:
+googleDocJson:
+  fileId:
+  output: "./src/data/models/archieExample.json"

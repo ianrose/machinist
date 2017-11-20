@@ -1,40 +1,40 @@
 // Set a true or false for production/development. Use to run certain plugins
-var devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'development')
-var stageBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'staging')
-var productionBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production')
-var debugMode = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'debug')
+const devBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'development')
+const stageBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'staging')
+const productionBuild = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'production')
+const debugMode = ((process.env.NODE_ENV || '').trim().toLowerCase() === 'debug')
 
 // Dependencies
-var fs = require('fs')
-var path = require('path')
-var Metalsmith = require('metalsmith')
-var markdown = require('metalsmith-markdown')
-var layouts = require('metalsmith-layouts')
-var assets = require('metalsmith-assets')
-var collections = require('metalsmith-collections')
-var permalinks = require('metalsmith-permalinks')
-var browserSync = devBuild ? require('metalsmith-browser-sync') : null
-var globaldata = require('metalsmith-metadata')
-var sass = require('metalsmith-sass')
-var inplace = require('metalsmith-in-place')
-var debug = require('metalsmith-debug')
-var helpers = require('metalsmith-register-helpers')
-var sitemap = require('metalsmith-mapsite')
-var postcss = require('metalsmith-with-postcss')
-var paths = require('metalsmith-paths')
-var drafts = require('metalsmith-drafts')
-var uglify = require('metalsmith-uglify')
-var webpack = require('metalsmith-webpack')
-var models = require('metalsmith-models')
-var filedata = require('metalsmith-filedata')
-var writemetadata = require('metalsmith-writemetadata')
-var raw = require('metalsmith-raw')
-var fingerprint = require('metalsmith-fingerprint-ignore')
-var pkg = require('./package.json')
-var config = require('./config.json')
+const fs = require('fs')
+const path = require('path')
+const yaml = require('js-yaml')
+const Metalsmith = require('metalsmith')
+const markdown = require('metalsmith-markdown')
+const layouts = require('metalsmith-layouts')
+const assets = require('metalsmith-assets')
+const collections = require('metalsmith-collections')
+const permalinks = require('metalsmith-permalinks')
+const browserSync = devBuild ? require('metalsmith-browser-sync') : null
+const globaldata = require('metalsmith-metadata')
+const sass = require('metalsmith-sass')
+const inplace = require('metalsmith-in-place')
+const debug = require('metalsmith-debug')
+const helpers = require('metalsmith-register-helpers')
+const sitemap = require('metalsmith-mapsite')
+const postcss = require('metalsmith-with-postcss')
+const paths = require('metalsmith-paths')
+const drafts = require('metalsmith-drafts')
+const webpack = require('metalsmith-webpack2')
+const models = require('metalsmith-models')
+const filedata = require('metalsmith-filedata')
+const writemetadata = require('metalsmith-writemetadata')
+const raw = require('metalsmith-raw')
+const fingerprint = require('metalsmith-fingerprint-ignore')
+const pkg = require('./package.json')
+const config = yaml.safeLoad(fs.readFileSync('config.yml', 'utf8'))
 
 // Global Configuration
-var assetPath
+let assetPath
 
 if (devBuild) {
   assetPath = config.assetPath.development
@@ -56,9 +56,9 @@ config.devBuild = devBuild
 config.debugMode = debugMode
 
 // Adds metadata from files
-var data = {}
+const data = {}
 if (fs.existsSync(config.src + 'data/globals/')) {
-  var dataFiles = fs.readdirSync(path.join(__dirname, config.src + 'data', 'globals'))
+  const dataFiles = fs.readdirSync(path.join(__dirname, config.src + 'data', 'globals'))
 
   dataFiles.forEach(function (filename) {
     data[filename.split('.')[0]] = 'data/globals/' + filename
@@ -66,7 +66,7 @@ if (fs.existsSync(config.src + 'data/globals/')) {
 }
 
 // Metalsmith Build
-var ms = Metalsmith(__dirname)
+const ms = Metalsmith(__dirname)
   .source(config.src)
   .destination(config.dest)
   .metadata(config)
@@ -105,15 +105,7 @@ var ms = Metalsmith(__dirname)
     pattern: ['styles/*.css'],
     key: 'cssData'
   }))
-  .use(webpack({
-    context: config.src + 'scripts/',
-    entry: './main.js',
-    devtool: devBuild ? 'source-map' : null,
-    output: {
-      path: path.resolve(__dirname, config.dest + 'scripts/'),
-      filename: devBuild ? '[name].js' : '[name].[hash].js'
-    }
-  }))
+  .use(webpack(require('./webpack.config.js')(config)))
   .use(fingerprint({
     pattern: 'styles/main.css',
     keep: true
@@ -168,13 +160,6 @@ if (debugMode) {
   }))
 }
 
-if (!devBuild) {
-  ms.use(uglify({
-    removeOriginal: true,
-    nameTemplate: '[name].js'
-  }))
-}
-
 if (devBuild) {
   ms.use(browserSync({
     server: config.dest,
@@ -195,6 +180,6 @@ ms.use(debug({
   .build(function (error) {
     console.log((devBuild ? 'Development' : 'Production'), 'build success, version', pkg.version)
     if (error) {
-      console.log(error)
+      throw error
     }
   })
