@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "description": "A boilerplate for a Metalsmith static site.",
   "main": "index.js",
-  "pre-commit": "lint-staged",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
@@ -16,7 +15,7 @@
     "script-lint": "eslint \"src/scripts/**\" \"lib/**\"",
     "style-lint": "stylelint \"**/*.scss\"",
     "lint": "npm run script-lint && npm run style-lint && htmlhint **/*.{hbs,html} --config .htmlhintrc --ignore **/www/**",
-    "lint-staged": "lint-staged"
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
