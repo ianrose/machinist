@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "autoprefixer": "^6.4.0",
-    "googledoc-to-json": "^0.3.0",
+    "googledoc-to-json": "^1.0.0",
     "handlebars": "^4.0.5",
     "handlebars-helpers": "^0.7.5",
     "js-yaml": "^3.10.0",
